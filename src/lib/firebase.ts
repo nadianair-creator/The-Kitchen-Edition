@@ -12,7 +12,29 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 }
 
-export const app = initializeApp(firebaseConfig)
-export const db = getFirestore(app)
+let app: any = null
+let db: any = null
 
-export const analyticsPromise = isSupported().then((ok) => (ok ? getAnalytics(app) : null))
+try {
+  if (firebaseConfig.projectId) {
+    app = initializeApp(firebaseConfig)
+    db = getFirestore(app)
+  } else {
+    console.warn('Firebase config incomplete — skipping init')
+  }
+} catch (e) {
+  console.warn('Firebase init failed:', e)
+}
+
+export { app, db }
+
+export const analyticsPromise = (async () => {
+  if (!app) return null
+  try {
+    const ok = await isSupported()
+    return ok ? getAnalytics(app) : null
+  } catch (e) {
+    console.warn('Analytics init failed:', e)
+    return null
+  }
+})()

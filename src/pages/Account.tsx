@@ -9,7 +9,7 @@ export default function Account(){
 
   useEffect(() => {
     if (!loading && user?.id) {
-      fetchSubscription(user.id).then(setSubscription)
+      fetchSubscription(user.id).then(setSubscription).catch((e) => console.warn('Failed to fetch subscription:', e))
     }
   }, [loading, user])
 

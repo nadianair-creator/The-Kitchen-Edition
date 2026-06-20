@@ -15,14 +15,53 @@ import AiPlanner from './pages/AiPlanner'
 import AiAssistant from './pages/AiAssistant'
 import UpgradeGate from './components/UpgradeGate'
 
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean; error: Error | null }> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props)
+    this.state = { hasError: false, error: null }
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error('Error caught by boundary:', error, info)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-paper text-ink font-sans">
+          <header className="max-w-4xl mx-auto px-6 py-8">
+            <Link to="/" className="font-serif text-3xl">The Kitchen Edition</Link>
+          </header>
+          <main className="max-w-4xl mx-auto px-6">
+            <div className="p-6 bg-red-50 border border-red-200 rounded">
+              <h1 className="font-serif text-2xl text-red-900">Something went wrong</h1>
+              <p className="mt-2 text-red-700">{this.state.error?.message || 'An unexpected error occurred'}</p>
+              <button onClick={() => window.location.reload()} className="mt-4 px-4 py-2 bg-red-200 border border-red-400 rounded">
+                Reload page
+              </button>
+            </div>
+          </main>
+        </div>
+      )
+    }
+
+    return this.props.children
+  }
+}
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-paper text-ink font-sans">
-      <header className="max-w-4xl mx-auto px-6 py-8">
-        <Link to="/" className="font-serif text-3xl">The Kitchen Edition</Link>
-      </header>
-      <main className="max-w-4xl mx-auto px-6">
-        <Routes>
+    <ErrorBoundary>
+      <div className="min-h-screen bg-paper text-ink font-sans">
+        <header className="max-w-4xl mx-auto px-6 py-8">
+          <Link to="/" className="font-serif text-3xl">The Kitchen Edition</Link>
+        </header>
+        <main className="max-w-4xl mx-auto px-6">
+          <Routes>
           <Route path="/" element={<Discover />} />
           <Route path="/planner" element={<UpgradeGate requiredPlan="pro"><Planner /></UpgradeGate>} />
           <Route path="/prep" element={<UpgradeGate requiredPlan="pro"><Prep /></UpgradeGate>} />
@@ -39,5 +78,6 @@ export default function App() {
         </Routes>
       </main>
     </div>
+    </ErrorBoundary>
   )
 }
