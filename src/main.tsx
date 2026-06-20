@@ -6,7 +6,7 @@ import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/The-Kitchen-Edition">
       <App />
     </BrowserRouter>
   </React.StrictMode>
