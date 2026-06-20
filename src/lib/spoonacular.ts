@@ -1,5 +1,5 @@
 const BASE_URL = 'https://api.spoonacular.com'
-const API_KEY = import.meta.env.VITE_SPOONACULAR_API_KEY
+const API_KEY = '81425b27ea3940ae8f24209957fcceff'
 
 export async function searchByIngredients(ingredients: string[]) {
   const url = `${BASE_URL}/recipes/findByIngredients?ingredients=${ingredients.join(",")}&number=12&ranking=2&apiKey=${API_KEY}`
