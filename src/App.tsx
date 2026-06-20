@@ -62,22 +62,22 @@ export default function App() {
         </header>
         <main className="max-w-4xl mx-auto px-6">
           <Routes>
-          <Route path="/" element={<Discover />} />
-          <Route path="/planner" element={<UpgradeGate requiredPlan="pro"><Planner /></UpgradeGate>} />
-          <Route path="/prep" element={<UpgradeGate requiredPlan="pro"><Prep /></UpgradeGate>} />
-          <Route path="/grocery" element={<UpgradeGate requiredPlan="pro"><Grocery /></UpgradeGate>} />
-          <Route path="/pantry" element={<UpgradeGate requiredPlan="pro"><Pantry /></UpgradeGate>} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/eat-out" element={<UpgradeGate requiredPlan="pro"><EatOut /></UpgradeGate>} />
-          <Route path="/about" element={<About />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/ai-planner" element={<UpgradeGate requiredPlan="ultra"><AiPlanner /></UpgradeGate>} />
-          <Route path="/ai-assistant" element={<UpgradeGate requiredPlan="ultra"><AiAssistant /></UpgradeGate>} />
-        </Routes>
-      </main>
-    </div>
+            <Route path="/" element={<Discover />} />
+            <Route path="/planner" element={<UpgradeGate requiredPlan="pro"><Planner /></UpgradeGate>} />
+            <Route path="/prep" element={<UpgradeGate requiredPlan="pro"><Prep /></UpgradeGate>} />
+            <Route path="/grocery" element={<UpgradeGate requiredPlan="pro"><Grocery /></UpgradeGate>} />
+            <Route path="/pantry" element={<UpgradeGate requiredPlan="pro"><Pantry /></UpgradeGate>} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/eat-out" element={<UpgradeGate requiredPlan="pro"><EatOut /></UpgradeGate>} />
+            <Route path="/about" element={<About />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/ai-planner" element={<UpgradeGate requiredPlan="ultra"><AiPlanner /></UpgradeGate>} />
+            <Route path="/ai-assistant" element={<UpgradeGate requiredPlan="ultra"><AiAssistant /></UpgradeGate>} />
+          </Routes>
+        </main>
+      </div>
     </ErrorBoundary>
   )
 }
